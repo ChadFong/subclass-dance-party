@@ -1,15 +1,57 @@
 $(document).ready(function(){
   window.dancers = [];
 
+  // $(".dancer").mouseover(function(event){
+  //   console.log('it worked');
+  //   // $(this).toggle( "bounce", { times: 3 },'fast');
+  // });
+  // $(function(){
+  //   $('.bellydancer').hover(function(){
+
+  //   });
+  // });
+
   $(".formationButton").on("click", function(event){
-    // var gap = $(window).width()/window.dancers.length;
-    // var spacing = gap;
     var percentPerDancer = 100/(window.dancers.length + 1);
     var position = percentPerDancer;
     for(var i = 0; i < window.dancers.length; i++){
       window.dancers[i].lineUp(position);
       position += percentPerDancer;
-      // spacing += gap;
+    }
+  });
+
+  $(".friendshipButton").on("click", function(event){
+    var topL = {
+      top: screen.height/4,
+      left: screen.width/4
+    }
+    var topR = {
+      top: screen.height/4,
+      left: (screen.width/4)*3
+    }
+    var bottomL = {
+      top: (screen.height/4)*3,
+      left: screen.width/4
+    }
+    var bottomR = {
+      top: (screen.height/4)*3,
+      left: (screen.width/4)*3
+    }
+    var quadrants = [topL, topR, bottomL, bottomR];
+
+    for(var i = 0; i < window.dancers.length;i++) {
+      var x = window.dancers[i].$node[0].offsetLeft;
+      var y = window.dancers[i].$node[0].offsetTop;
+      var dist, closest = [100000];
+      for(var j = 0 ; j < quadrants.length ; j++) {
+        var relX = quadrants[j].left - x;
+        var relY = quadrants[j].top - y;
+        dist = Math.sqrt(Math.pow(relX,2) + Math.pow(relY,2));
+        if(dist < closest[0]){
+          closest = [dist, quadrants[j]];
+        }
+      }
+      window.dancers[i].makeFriends(closest[1]);
     }
   });
 
@@ -41,11 +83,16 @@ $(document).ready(function(){
     );
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
+    $(".dancer").mouseover(function(event){
+      console.log('it worked');
+      // $(this).slideUp();
+    });
   });
 });
 
 /*
-TODO: find out how to auto set stuff to background size
-Make animated dancers
-Animate dancer movement
+TODO:
+make mouseover not delete things.
+make dancers circle around quadrants.
+Make animated dancers.
 */

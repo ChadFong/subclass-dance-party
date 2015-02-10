@@ -1,13 +1,16 @@
 // Creates and returns a new dancer object that can step
 var makeDancer = function(top, left, timeBetweenSteps){
   // use jQuery to create an HTML <span> tag
-  this.$node = $('<span class="dancer"></span>');
+  this.$node = $('<span class="dancer"><img src="http://fc09.deviantart.net/fs70/f/2011/182/2/6/nyan_cat_by_bricu-d3ko0ax.png" height="42" width="42"></span>');
 
   this.timeBetweenSteps = timeBetweenSteps;
   this.step();
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
   // this one sets the position to some random default point within the body
   this.setPosition(top, left);
+  // $(".dancer").mouseover(function(event){
+  //   console.log("dog");
+  // });
 };
 
 makeDancer.prototype.step = function(){
@@ -28,9 +31,17 @@ makeDancer.prototype.setPosition = function(top, left){
 };
 
 makeDancer.prototype.lineUp = function(location){
-  var styleSettings = {
+  this.$node.animate({
     top: '50%',
     left: location + '%'
-  }
-  this.$node.css(styleSettings);
+  }, 2000)
 };
+
+makeDancer.prototype.makeFriends = function(quadrant){
+
+  this.$node.animate({
+    top: quadrant.top + '',
+    left: quadrant.left + ''
+  }, 2000)
+};
+
