@@ -25,12 +25,31 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
+
+@-webkit-keyframes circle {
+  from {transform:rotate(0deg) translate(-330px) rotate(0deg);}
+  to {transfrom:rotate(360deg) translate(-330px) rotate(-360deg);}
+}
+
+.circular {
+  top: 330px;
+  -webkit-animation: circle 6s linear infinite;
+}
+
+@-webkit-keyframes bob {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
 .dancer{
   border:10px solid red;
   border-radius:10px;
   size:50px, 75px;
   position:absolute;
+  /*-webkit-animation:bob 5s infinite;*/
+  /*transition: all .2s ease-in-out;*/
 }
+
 .blueBlinky{
   border:10px solid blue;
 }

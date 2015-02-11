@@ -1,16 +1,6 @@
 $(document).ready(function(){
   window.dancers = [];
 
-  // $(".dancer").mouseover(function(event){
-  //   console.log('it worked');
-  //   // $(this).toggle( "bounce", { times: 3 },'fast');
-  // });
-  // $(function(){
-  //   $('.bellydancer').hover(function(){
-
-  //   });
-  // });
-
   $(".formationButton").on("click", function(event){
     var percentPerDancer = 100/(window.dancers.length + 1);
     var position = percentPerDancer;
@@ -51,9 +41,13 @@ $(document).ready(function(){
           closest = [dist, quadrants[j]];
         }
       }
+      $(window.dancers[i].$node[0]).addClass('circular');
       window.dancers[i].makeFriends(closest[1]);
     }
   });
+  // $("body").on('mouseover', '.dancer', function(event){
+  //     // $(this).remove();
+  //   });
 
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -83,10 +77,6 @@ $(document).ready(function(){
     );
     window.dancers.push(dancer);
     $('body').append(dancer.$node);
-    $(".dancer").mouseover(function(event){
-      console.log('it worked');
-      // $(this).slideUp();
-    });
   });
 });
 
